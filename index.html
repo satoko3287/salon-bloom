@@ -256,10 +256,10 @@
 
   /* faq */
   .faq-item { border-bottom: 1px solid var(--line); padding: 22px 4px; }
-  .faq-q { font-weight: 600; font-size: 15.5px; margin: 0 0 8px; display: flex; gap: 12px; }
-  .faq-q::before { content: "Q"; color: var(--rose); font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; }
-  .faq-a { margin: 0; font-size: 14px; color: var(--ink-soft); display: flex; gap: 12px; }
-  .faq-a::before { content: "A"; color: var(--gold); font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; flex-shrink: 0; }
+  .faq-q { font-weight: 600; font-size: 15.5px; margin: 0 0 8px; position: relative; padding-left: 30px; }
+  .faq-q::before { content: "Q"; position: absolute; left: 2px; top: 0; color: var(--rose); font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; }
+  .faq-a { margin: 0; font-size: 14px; color: var(--ink-soft); position: relative; padding-left: 30px; }
+  .faq-a::before { content: "A"; position: absolute; left: 2px; top: 0; color: var(--gold); font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; }
 
   footer { border-top: 1px solid var(--line); padding: 40px 0 60px; font-size: 12px; color: var(--ink-soft); }
   footer .disclaimer {
