@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Salon Bloom｜エステサロン向け 補助金・助成金かんたん診断</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --ground: #FBF7F4;
+    --card: #FFFFFF;
+    --ink: #43303C;
+    --ink-soft: #7A6470;
+    --rose: #B0526B;
+    --rose-deep: #8C3B54;
+    --rose-mist: #F6E7EB;
+    --plum: #5C3A52;
+    --gold: #BE9455;
+    --line: #ECDDE2;
+    --shadow: 0 10px 30px rgba(92, 58, 82, .08);
+    --ok: #4C8A6B;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #251C23;
+      --card: #322632;
+      --ink: #F2E7EC;
+      --ink-soft: #BBA3B0;
+      --rose: #D98BA0;
+      --rose-deep: #E5A9B9;
+      --rose-mist: #45303C;
+      --plum: #D5BBCC;
+      --gold: #D6B27E;
+      --line: #4A3945;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+      --ok: #7FBC9D;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #251C23;
+    --card: #322632;
+    --ink: #F2E7EC;
+    --ink-soft: #BBA3B0;
+    --rose: #D98BA0;
+    --rose-deep: #E5A9B9;
+    --rose-mist: #45303C;
+    --plum: #D5BBCC;
+    --gold: #D6B27E;
+    --line: #4A3945;
+    --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    --ok: #7FBC9D;
+  }
+  :root[data-theme="light"] {
+    --ground: #FBF7F4;
+    --card: #FFFFFF;
+    --ink: #43303C;
+    --ink-soft: #7A6470;
+    --rose: #B0526B;
+    --rose-deep: #8C3B54;
+    --rose-mist: #F6E7EB;
+    --plum: #5C3A52;
+    --gold: #BE9455;
+    --line: #ECDDE2;
+    --shadow: 0 10px 30px rgba(92, 58, 82, .08);
+    --ok: #4C8A6B;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+    line-height: 1.85;
+    font-size: 16px;
+  }
+  .serif {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "BIZ UDMincho", serif;
+    font-weight: 600;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 22px; }
+
+  /* header */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 18px; letter-spacing: .04em; }
+  .brand .mark { color: var(--rose); font-size: 20px; }
+  .brand small { display: block; font-size: 11px; color: var(--ink-soft); letter-spacing: .12em; font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif; font-weight: 400; }
+  .nav-links { display: flex; gap: 20px; align-items: center; font-size: 13.5px; }
+  .nav-links a { color: var(--ink-soft); text-decoration: none; }
+  .nav-links a:hover { color: var(--rose); }
+  .nav-links a:focus-visible, a.btn:focus-visible, button:focus-visible {
+    outline: 2px solid var(--rose); outline-offset: 3px; border-radius: 4px;
+  }
+  @media (max-width: 640px) { .nav-links .hide-sp { display: none; } }
+
+  /* buttons */
+  .btn {
+    display: inline-block; border: none; cursor: pointer; text-decoration: none;
+    font-family: inherit; font-size: 15.5px; letter-spacing: .05em;
+    padding: 14px 34px; border-radius: 999px;
+    background: var(--rose); color: #fff;
+    box-shadow: 0 6px 18px rgba(176, 82, 107, .3);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  :root[data-theme="dark"] .btn, .dark-btn-fix { color: #2b1620; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #2b1620; } }
+  :root[data-theme="light"] .btn { color: #fff; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(176, 82, 107, .38); }
+  .btn.ghost {
+    background: transparent; color: var(--rose); box-shadow: none;
+    border: 1.5px solid var(--rose);
+  }
+  .btn.small { padding: 9px 22px; font-size: 13.5px; }
+
+  /* hero */
+  .hero {
+    position: relative; overflow: hidden;
+    padding: 84px 0 72px;
+    background:
+      radial-gradient(680px 340px at 82% -60px, var(--rose-mist), transparent 70%),
+      radial-gradient(520px 300px at -60px 110%, color-mix(in srgb, var(--gold) 14%, transparent), transparent 70%);
+  }
+  .eyebrow {
+    display: inline-block; font-size: 12px; letter-spacing: .3em; color: var(--rose);
+    border: 1px solid color-mix(in srgb, var(--rose) 45%, transparent);
+    padding: 5px 16px 5px 19px; border-radius: 999px; margin-bottom: 26px;
+  }
+  h1 {
+    font-size: clamp(30px, 5.4vw, 46px); line-height: 1.55; margin: 0 0 20px;
+    letter-spacing: .06em; text-wrap: balance; font-weight: 600;
+  }
+  h1 .accent { color: var(--rose); }
+  .hero p.lead { max-width: 560px; color: var(--ink-soft); font-size: 15.5px; margin: 0 0 34px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 30px; }
+  .hero-notes { display: flex; gap: 22px; flex-wrap: wrap; font-size: 13px; color: var(--ink-soft); }
+  .hero-notes span::before { content: "❀ "; color: var(--gold); }
+
+  /* sections */
+  section { padding: 72px 0; }
+  section.alt { background: color-mix(in srgb, var(--rose-mist) 45%, var(--ground)); }
+  .sec-head { text-align: center; margin-bottom: 46px; }
+  .sec-head .eyebrow { margin-bottom: 16px; }
+  h2 { font-size: clamp(22px, 3.4vw, 30px); margin: 0 0 12px; letter-spacing: .08em; font-weight: 600; text-wrap: balance; }
+  .sec-head p { color: var(--ink-soft); font-size: 14.5px; max-width: 620px; margin: 0 auto; }
+
+  .cards3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .step-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 28px 26px; box-shadow: var(--shadow);
+  }
+  .step-card .num {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    color: var(--gold); font-size: 15px; letter-spacing: .2em; margin-bottom: 10px;
+  }
+  .step-card h3 { margin: 0 0 8px; font-size: 16.5px; letter-spacing: .04em; }
+  .step-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+
+  /* diagnosis */
+  #shindan .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: 24px;
+    box-shadow: var(--shadow); max-width: 720px; margin: 0 auto; padding: 40px 34px;
+  }
+  @media (max-width: 560px) { #shindan .panel { padding: 30px 20px; } }
+  .progress { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .progress .label { font-size: 12.5px; letter-spacing: .15em; color: var(--rose); white-space: nowrap; }
+  .progress .bar { flex: 1; height: 5px; border-radius: 99px; background: var(--rose-mist); overflow: hidden; }
+  .progress .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--rose), var(--gold)); border-radius: 99px; transition: width .3s ease; }
+  .q-title { font-size: 20px; margin: 0 0 6px; letter-spacing: .05em; font-weight: 600; }
+  .q-sub { font-size: 13px; color: var(--ink-soft); margin: 0 0 22px; }
+  .opts { display: grid; gap: 12px; }
+  .opt {
+    display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+    background: var(--ground); border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 15px 18px; cursor: pointer; font-family: inherit; font-size: 15px; color: var(--ink);
+    transition: border-color .15s, background .15s, transform .1s;
+  }
+  .opt:hover { border-color: var(--rose); transform: translateY(-1px); }
+  .opt .petal { color: var(--line); font-size: 17px; transition: color .15s; flex-shrink: 0; }
+  .opt.selected { border-color: var(--rose); background: var(--rose-mist); }
+  .opt.selected .petal { color: var(--rose); }
+  .opt small { display: block; color: var(--ink-soft); font-size: 12px; line-height: 1.5; }
+  .q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; gap: 12px; }
+  .link-back { background: none; border: none; cursor: pointer; color: var(--ink-soft); font-family: inherit; font-size: 13.5px; padding: 8px; }
+  .link-back:hover { color: var(--rose); }
+
+  /* results */
+  .result-note {
+    background: color-mix(in srgb, var(--gold) 12%, var(--card));
+    border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+    border-radius: 14px; padding: 16px 20px; font-size: 13.5px; margin-bottom: 22px;
+  }
+  .r-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 26px 26px 22px; margin-bottom: 18px; box-shadow: var(--shadow);
+  }
+  .r-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .r-title { font-size: 17.5px; font-weight: 600; letter-spacing: .03em; line-height: 1.5; }
+  .r-flowers { color: var(--rose); font-size: 16px; letter-spacing: .18em; white-space: nowrap; }
+  .r-flowers .dim { color: var(--line); }
+  .r-flowers small { color: var(--ink-soft); letter-spacing: 0; font-size: 11.5px; margin-left: 6px; }
+  .tag {
+    display: inline-block; font-size: 11px; letter-spacing: .12em; border-radius: 999px;
+    padding: 3px 12px; margin-bottom: 10px; margin-right: 6px;
+  }
+  .tag.hojo { background: var(--rose-mist); color: var(--rose-deep); }
+  .tag.josei { background: color-mix(in srgb, var(--plum) 14%, var(--card)); color: var(--plum); }
+  .tag.chiho { background: color-mix(in srgb, var(--gold) 16%, var(--card)); color: var(--gold); }
+  .r-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px 20px; margin: 12px 0; font-size: 13.5px; }
+  .r-grid b { color: var(--rose-deep); font-weight: 600; }
+  .r-grid .k { color: var(--ink-soft); font-size: 11.5px; letter-spacing: .1em; display: block; }
+  .r-hint { font-size: 13.5px; color: var(--ink-soft); border-top: 1px dashed var(--line); padding-top: 12px; margin-top: 12px; }
+  .r-hint b { color: var(--ink); }
+  .r-note-line { font-size: 12.5px; color: var(--gold); margin-top: 8px; }
+  .r-actions { margin-top: 14px; }
+  .r-actions a { font-size: 13px; color: var(--rose); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--rose) 40%, transparent); padding-bottom: 1px; }
+  .r-actions a:hover { border-bottom-color: var(--rose); }
+
+  .next-box {
+    background: var(--rose-mist); border-radius: 18px; padding: 26px 26px; margin-top: 30px;
+  }
+  .next-box h3 { margin: 0 0 10px; font-size: 16px; letter-spacing: .05em; }
+  .next-box ul { margin: 0; padding-left: 20px; font-size: 13.5px; color: var(--ink); }
+  .next-box li { margin-bottom: 6px; }
+  .next-box li b { color: var(--rose-deep); }
+
+  /* list section */
+  details.sys {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    margin-bottom: 12px; overflow: hidden;
+  }
+  details.sys summary {
+    cursor: pointer; padding: 18px 22px; font-size: 15px; font-weight: 600; letter-spacing: .03em;
+    display: flex; align-items: center; gap: 12px; list-style: none;
+  }
+  details.sys summary::-webkit-details-marker { display: none; }
+  details.sys summary::before { content: "❀"; color: var(--line); transition: color .2s, transform .2s; }
+  details.sys[open] summary::before { color: var(--rose); transform: rotate(90deg); }
+  details.sys .body { padding: 0 22px 20px; font-size: 13.5px; color: var(--ink-soft); }
+  details.sys .body b { color: var(--ink); }
+  details.sys .body a { color: var(--rose); }
+
+  /* faq */
+  .faq-item { border-bottom: 1px solid var(--line); padding: 22px 4px; }
+  .faq-q { font-weight: 600; font-size: 15.5px; margin: 0 0 8px; display: flex; gap: 12px; }
+  .faq-q::before { content: "Q"; color: var(--rose); font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; }
+  .faq-a { margin: 0; font-size: 14px; color: var(--ink-soft); display: flex; gap: 12px; }
+  .faq-a::before { content: "A"; color: var(--gold); font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; flex-shrink: 0; }
+
+  footer { border-top: 1px solid var(--line); padding: 40px 0 60px; font-size: 12px; color: var(--ink-soft); }
+  footer .disclaimer {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 20px; margin-bottom: 20px; line-height: 1.9;
+  }
+
+  .fade-in { animation: fadeUp .4s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+<meta name="description" content="エステサロンの女性オーナー向け。5つの質問に答えるだけで、あなたのサロンで使える補助金・助成金の候補がわかる無料の診断サイトです。">
+</head>
+<body>
+
+
+<header>
+  <div class="wrap nav">
+    <div class="brand serif"><span class="mark">❀</span>
+      <span>Salon Bloom<small>エステサロンのための補助金・助成金診断</small></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#shindan">かんたん診断</a>
+      <a href="#list" class="hide-sp">制度一覧</a>
+      <a href="#faq" class="hide-sp">よくある質問</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">FOR SALON OWNERS</span>
+      <h1 class="serif">サロンに、<span class="accent">咲く</span>追い風を。<br>
+        あなたのサロンで使える<br>補助金・助成金がわかります。</h1>
+      <p class="lead">「補助金って、うちみたいな小さなサロンでも使えるの？」——使えます。5つの質問に答えるだけで、あなたのサロンに合う制度の候補を❀の相性つきでご案内。専門用語ぬきで、やさしく説明します。</p>
+      <div class="hero-cta">
+        <a class="btn" href="#shindan">無料で診断をはじめる</a>
+        <a class="btn ghost" href="#list">制度の一覧を見る</a>
+      </div>
+      <div class="hero-notes">
+        <span>入力は約1分・5問だけ</span>
+        <span>登録・費用は不要</span>
+        <span>ひとりサロン・おうちサロンもOK</span>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">HOW IT WORKS</span>
+        <h2 class="serif">診断のながれ</h2>
+        <p>むずかしい書類の前に、まず「うちは何が使えそうか」を知るところから。</p>
+      </div>
+      <div class="cards3">
+        <div class="step-card">
+          <div class="num">STEP 01</div>
+          <h3>5つの質問に答える</h3>
+          <p>サロンの状況と「これからやりたいこと」を選ぶだけ。数字の入力はありません。</p>
+        </div>
+        <div class="step-card">
+          <div class="num">STEP 02</div>
+          <h3>相性❀つきで結果を見る</h3>
+          <p>あなたのサロンと相性のいい制度から順に、金額・使いみち・注意点をひとことで解説。</p>
+        </div>
+        <div class="step-card">
+          <div class="num">STEP 03</div>
+          <h3>無料の相談窓口へ</h3>
+          <p>気になる制度が見つかったら、商工会議所などの無料窓口へ。結果画面に次の一歩をご案内します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="shindan">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">DIAGNOSIS</span>
+        <h2 class="serif">かんたん診断</h2>
+        <p>直感で選んでOK。あとから何度でもやり直せます。</p>
+      </div>
+      <div class="panel" id="panel"></div>
+    </div>
+  </section>
+
+  <section id="list">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">ALL PROGRAMS</span>
+        <h2 class="serif">エステサロンで使える制度一覧</h2>
+        <p>2026年7月時点の情報です。タップすると詳しい内容がひらきます。</p>
+      </div>
+      <div id="sysList"></div>
+    </div>
+  </section>
+
+  <section class="alt" id="faq">
+    <div class="wrap" style="max-width:760px">
+      <div class="sec-head">
+        <span class="eyebrow">Q &amp; A</span>
+        <h2 class="serif">よくある質問</h2>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">「補助金」と「助成金」って、なにが違うの？</p>
+        <p class="faq-a">ざっくり言うと、<b>補助金</b>は「審査で選ばれたらもらえる」もの（コンテスト型）、<b>助成金</b>は「条件を満たせば原則もらえる」もの（主に雇用まわり）。どちらも返済不要です。</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">個人事業主・おうちサロンでも使える？</p>
+        <p class="faq-a">使えます。多くの制度は個人事業主が対象。スタートラインは税務署への「開業届」です。まだの方はそこから始めましょう。</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">お金はいつもらえるの？</p>
+        <p class="faq-a">ここが大事なポイントで、原則<b>あとから</b>（精算払い）です。先に自分で支払い、報告書を出してから振り込まれます。手元資金の計画はお忘れなく。</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">スタッフのいない「ひとりサロン」でも助成金は使える？</p>
+        <p class="faq-a">キャリアアップ助成金などの雇用系助成金は「スタッフを雇用していること」が前提なので、ひとりサロンでは使えません。そのかわり持続化補助金やIT系の補助金が心強い味方になります。</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">申請は自分でできる？だれに相談すればいい？</p>
+        <p class="faq-a">持続化補助金は地域の<b>商工会議所・商工会</b>が無料でサポートしてくれます。雇用系の助成金は<b>社会保険労務士（社労士）</b>さんに相談すると安心。国の無料相談窓口「よろず支援拠点」も全国にあります。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="disclaimer">
+      ※ 本サイトは2026年7月時点の公開情報にもとづく簡易診断です。制度の金額・要件・募集時期は年度や公募回によって変わります。診断結果は「使える可能性のご案内」であり、受給を保証するものではありません。申請の前に必ず各制度の公式サイト・お近くの商工会議所・専門家にご確認ください。
+    </div>
+    <div>❀ Salon Bloom — エステサロンのための補助金・助成金かんたん診断</div>
+  </div>
+</footer>
+
+<script>
+// 相談導線の設定：url にLINE公式アカウント等のリンクを入れると、結果画面にやさしい相談ボタンが表示されます（空欄なら非表示）
+const CONTACT = {
+  url: "",
+  label: "LINEで気軽に聞いてみる",
+  note: "「どれから手をつければいいの？」くらいのふんわりした質問で大歓迎。無理な営業やしつこい連絡は一切ありません。"
+};
+
+const SUBSIDIES = {
+  jizokuka: {
+    name: "小規模事業者持続化補助金",
+    type: "hojo", typeLabel: "補助金",
+    max: "50万円〜最大250万円", rate: "2/3（赤字の場合3/4）",
+    use: "HP・チラシ・広告、看板、内装工事、エステ機器 など",
+    hint: "集客にお金を使うなら、まずコレ。個人サロンでいちばん使われている定番の補助金です。地域の商工会議所が無料で申請をサポートしてくれます。",
+    cond: "開業届を出している小規模事業者（サービス業は従業員5人以下）",
+    link: "https://www.chusho.meti.go.jp/keiei/shokibo/jizoku/", linkLabel: "中小企業庁の公式ページ"
+  },
+  it: {
+    name: "デジタル化・AI導入補助金（旧 IT導入補助金）",
+    type: "hojo", typeLabel: "補助金",
+    max: "最大450万円", rate: "1/2〜2/3",
+    use: "予約システム、POSレジ、会計ソフト、顧客管理、キャッシュレス端末",
+    hint: "予約や会計の手間を減らしたいならコレ。登録済みのITツールを選ぶ方式なので、ツールの販売会社と二人三脚で申請できます。",
+    cond: "導入するツールが制度に登録されていること",
+    link: "https://it-shien.smrj.go.jp/", linkLabel: "公式サイト"
+  },
+  gyomukaizen: {
+    name: "業務改善助成金",
+    type: "josei", typeLabel: "助成金",
+    max: "最大600万円", rate: "3/4〜4/5（とても高い！）",
+    use: "スタッフの時給アップとセットで、エステ機器・予約システムなどの設備投資",
+    hint: "「お給料アップ」と「設備投資」を両方やりたいなら、いちばんお得な制度。時給を50円以上上げることが条件です。",
+    cond: "雇用しているスタッフがいて、事業場内の最低賃金を引き上げること",
+    link: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/03.html", linkLabel: "厚生労働省の公式ページ"
+  },
+  careerup: {
+    name: "キャリアアップ助成金（正社員化コース）",
+    type: "josei", typeLabel: "助成金",
+    max: "1人あたり最大80万円", rate: "定額支給",
+    use: "パート・アルバイトのスタッフを正社員にしたとき",
+    hint: "「正社員にしてあげたい子がいる」なら。大事なのは順番で、転換する前に『キャリアアップ計画』の提出が必要。先に社労士さんへ相談を。",
+    cond: "雇用保険に入っているスタッフがいること・事前の計画提出",
+    link: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/part_haken/jigyounushi/career.html", linkLabel: "厚生労働省の公式ページ"
+  },
+  jinzai: {
+    name: "人材開発支援助成金",
+    type: "josei", typeLabel: "助成金",
+    max: "研修費用の最大75%＋研修中の賃金も一部助成", rate: "コースによる",
+    use: "スタッフの技術研修・接客研修・資格取得など",
+    hint: "スタッフに新しい技術を学ばせたいときに。研修費だけでなく「研修中のお給料」まで助成されるのがうれしいポイント。",
+    cond: "雇用保険に入っているスタッフがいること",
+    link: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/kyufukin/d01-1.html", linkLabel: "厚生労働省の公式ページ"
+  },
+  ryoritsu: {
+    name: "両立支援等助成金",
+    type: "josei", typeLabel: "助成金",
+    max: "1人あたり数十万円（コースによる）", rate: "定額支給",
+    use: "産休・育休の取得と職場復帰のサポート、代わりのスタッフの確保",
+    hint: "「出産しても戻ってこられるサロン」づくりの味方。女性スタッフの多いサロンだからこそ、知っておきたい制度です。",
+    cond: "雇用保険に入っているスタッフがいること・育休制度の整備",
+    link: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kodomo/shokuba_kosodate/ryouritsu01/", linkLabel: "厚生労働省の公式ページ"
+  },
+  shoryokuka: {
+    name: "中小企業省力化投資補助金",
+    type: "hojo", typeLabel: "補助金",
+    max: "200万円〜（従業員数による）", rate: "1/2",
+    use: "カタログから選ぶ省人化機器（自動精算機、予約・受付システムなど）",
+    hint: "人手不足をラクにする機器を「カタログから選ぶだけ」の新しいタイプ。対象製品がカタログに載っているかの確認から始めましょう。",
+    cond: "カタログ登録された製品が対象",
+    link: "https://shoryokuka.smrj.go.jp/", linkLabel: "公式サイト"
+  },
+  monozukuri: {
+    name: "ものづくり補助金",
+    type: "hojo", typeLabel: "補助金",
+    max: "750万円〜", rate: "1/2（小規模事業者は2/3）",
+    use: "革新的な新サービスの開発、高額な設備投資",
+    hint: "大きめの投資で新しいサービスを立ち上げるときの選択肢。エステで使えるケースは限られるので、専門家に相談してから検討を。",
+    cond: "「革新性」のある事業計画・賃上げ計画が必要",
+    link: "https://portal.monodukuri-hojo.jp/", linkLabel: "公式サイト"
+  },
+  saitama: {
+    name: "埼玉県・市町村の開業/空き店舗支援",
+    type: "chiho", typeLabel: "埼玉県の制度",
+    max: "市町村による（改修費・家賃の一部など）", rate: "市町村による",
+    use: "空き店舗の改修工事費、家賃補助、商店街への出店、創業支援 など",
+    hint: "埼玉は市町村ごとの支援がとても充実。県の「企業支援ポータル」で、県と市町村の制度をまとめて検索できます。",
+    cond: "市町村ごとに異なる",
+    link: "https://www.pref.saitama.lg.jp/a0801/kigyoushien_portal.html", linkLabel: "埼玉県 企業支援ポータル"
+  },
+  chiba: {
+    name: "ちば創業応援助成金（千葉県）",
+    type: "chiho", typeLabel: "千葉県の制度",
+    max: "最大100万円", rate: "1/2",
+    use: "創業時の設備費・広告費など",
+    hint: "千葉県で創業するなら要チェック。募集は年に一度で期間が短めなので、次回募集の時期を早めに確認しておくのがコツ。",
+    cond: "県内で創業予定、または創業まもない方（要件あり）",
+    link: "https://www.ccjc-net.or.jp/category_list.php?frmCd=48-1-1-0-0", linkLabel: "千葉県産業振興センター"
+  },
+  kanagawa: {
+    name: "神奈川県・横浜市などの開業支援",
+    type: "chiho", typeLabel: "神奈川県の制度",
+    max: "制度による", rate: "制度による",
+    use: "商店街の空き店舗での開業支援（横浜市）、ITツール導入の補助（県）など",
+    hint: "横浜市の助成金は「スタートアップポートヨコハマ」にまとまっています。県やお住まいの市の窓口でもぜひ確認を。",
+    cond: "制度・市町村ごとに異なる",
+    link: "https://socialport-y.city.yokohama.lg.jp/subsidy/", linkLabel: "スタートアップポートヨコハマ"
+  },
+  tokyoSogyo: {
+    name: "東京都 創業助成金（創業助成事業）",
+    type: "chiho", typeLabel: "東京都の制度",
+    max: "最大400万円", rate: "2/3",
+    use: "家賃、広告費、器具備品、従業員の人件費など",
+    hint: "都内で創業まもないサロンさんは必ずチェック。なんと「家賃」まで対象になる、とても心強い制度です（応募要件あり）。",
+    cond: "都内で創業5年未満＋所定の要件（TOKYO創業ステーション利用など）",
+    link: "https://www.tokyo-kosha.or.jp/support/josei/jigyo/sogyo.html", linkLabel: "東京都中小企業振興公社"
+  },
+  local: {
+    name: "市区町村の補助金（お住まいの自治体）",
+    type: "chiho", typeLabel: "自治体の制度",
+    max: "自治体による（数万円〜数百万円）", rate: "自治体による",
+    use: "店舗改装、家賃補助、商店街への出店、創業支援、チラシ作成など",
+    hint: "実は穴場。「〇〇市 補助金 店舗」で検索するか、国のサイト『ミラサポplus』でお住まいの地域の制度をまとめて探せます。",
+    cond: "自治体ごとに異なる",
+    link: "https://mirasapo-plus.go.jp/", linkLabel: "ミラサポplus（国の公式）"
+  }
+};
+
+const QUESTIONS = [
+  { id: "stage", title: "サロンはいま、どの段階ですか？", sub: "いちばん近いものをひとつ選んでください", type: "single",
+    options: [
+      { v: "pre",    label: "これから開業する", sub: "物件探し・準備中の方もこちら" },
+      { v: "young",  label: "開業して5年未満" },
+      { v: "mature", label: "開業して5年以上" }
+    ]},
+  { id: "form", title: "事業のかたちは？", sub: "", type: "single",
+    options: [
+      { v: "kojin", label: "個人事業主", sub: "おうちサロン・フリーランスもこちら" },
+      { v: "corp",  label: "法人（会社）" }
+    ]},
+  { id: "staff", title: "スタッフについて教えてください", sub: "いちばん近いものをひとつ", type: "single",
+    options: [
+      { v: "solo", label: "わたしひとりで営業している" },
+      { v: "part", label: "パート・アルバイトのスタッフがいる" },
+      { v: "full", label: "正社員のスタッフがいる", sub: "パートさんも両方いる場合はこちら" },
+      { v: "hire", label: "いまはひとり。これから雇いたい" }
+    ]},
+  { id: "goals", title: "これから、やりたいことは？", sub: "あてはまるものを いくつでも 選んでください", type: "multi",
+    options: [
+      { v: "pr",       label: "集客を強化したい", sub: "ホームページ・チラシ・広告・看板" },
+      { v: "digital",  label: "予約や会計をラクにしたい", sub: "予約システム・POS・キャッシュレス" },
+      { v: "machine",  label: "新しい美容機器を導入したい" },
+      { v: "interior", label: "内装・改装をしたい" },
+      { v: "raise",    label: "スタッフの正社員化・お給料アップ" },
+      { v: "training", label: "スタッフの研修・スキルアップ" },
+      { v: "family",   label: "産休・育休をとれるサロンにしたい" },
+      { v: "newmenu",  label: "新しいメニュー・サービスを開発したい" }
+    ]},
+  { id: "area", title: "サロンの場所は？", sub: "地域の制度もあわせてご案内します", type: "single",
+    options: [
+      { v: "tokyo",    label: "東京都" },
+      { v: "saitama",  label: "埼玉県" },
+      { v: "chiba",    label: "千葉県" },
+      { v: "kanagawa", label: "神奈川県" },
+      { v: "other",    label: "その他の地域" }
+    ]}
+];
+
+let step = 0;
+let answers = {};
+
+function diagnose(a) {
+  const g = new Set(a.goals || []);
+  const hasStaff = a.staff === "part" || a.staff === "full";
+  const results = [];
+  const add = (id, score, note) => { if (score > 0) results.push({ id, score: Math.min(3, score), note }); };
+
+  // 持続化補助金
+  let s = 0;
+  if (a.stage !== "pre") {
+    s = 1;
+    if (g.has("pr")) s += 2;
+    if (g.has("interior")) s += 1;
+    if (g.has("machine")) s += 1;
+    if (g.has("newmenu")) s += 1;
+    add("jizokuka", s);
+  } else if (g.has("pr") || g.has("interior") || g.has("machine")) {
+    add("jizokuka", 1, "開業届を出したあとに申請できます。創業したての方向けの「創業型」もあります。");
+  }
+
+  // IT導入
+  if (g.has("digital")) {
+    if (a.stage !== "pre") add("it", 3);
+    else add("it", 1, "開業して実績ができてからの申請になります。");
+  }
+
+  // 業務改善助成金
+  if (hasStaff && g.has("raise")) add("gyomukaizen", 3);
+  else if (hasStaff && (g.has("machine") || g.has("digital"))) add("gyomukaizen", 2, "スタッフの時給を50円以上アップすることとセットで使えます。");
+  else if (a.staff === "hire" && g.has("raise")) add("gyomukaizen", 1, "スタッフを雇用してから使える制度です。");
+
+  // キャリアアップ助成金
+  if (a.staff === "part" && g.has("raise")) add("careerup", 3);
+  else if (a.staff === "part") add("careerup", 2, "いつか正社員化を考えるなら、早めに知っておくと◎。転換前の計画提出が必須です。");
+  else if (a.staff === "hire") add("careerup", 1, "スタッフを雇用してから。最初はパート採用→正社員化、という流れでも使えます。");
+
+  // 人材開発支援助成金
+  if (hasStaff && g.has("training")) add("jinzai", 3);
+  else if (a.staff === "hire" && g.has("training")) add("jinzai", 1, "雇用保険に入るスタッフを雇ってから使えます。");
+
+  // 両立支援
+  if (hasStaff && g.has("family")) add("ryoritsu", 3);
+  else if (a.staff === "hire" && g.has("family")) add("ryoritsu", 1, "スタッフを雇用してから使える制度です。");
+
+  // 省力化
+  if (g.has("digital") && a.stage !== "pre") add("shoryokuka", 2, "導入したい機器がカタログに載っているか、まず確認を。");
+
+  // ものづくり
+  if (g.has("newmenu") && (g.has("machine") || a.form === "corp")) add("monozukuri", 1, "投資額が大きい場合の選択肢。まずは持続化補助金から検討がおすすめ。");
+
+  // 地域の制度（一都三県）
+  if (a.area === "tokyo" && a.stage !== "mature") add("tokyoSogyo", 3);
+  if (a.area === "saitama") add("saitama", 2);
+  if (a.area === "chiba") {
+    if (a.stage !== "mature") add("chiba", 3);
+    else add("chiba", 1, "創業まもない方向けの制度です。市町村の制度もあわせてチェックを。");
+  }
+  if (a.area === "kanagawa") add("kanagawa", 2);
+
+  // 自治体
+  add("local", 1);
+
+  results.sort((x, y) => y.score - x.score);
+  return results;
+}
+
+const panel = document.getElementById("panel");
+
+function renderIntro() {
+  panel.innerHTML = `
+    <div class="fade-in" style="text-align:center; padding: 20px 0;">
+      <div style="font-size:34px; color:var(--rose); margin-bottom:14px;">❀</div>
+      <h3 class="q-title serif" style="font-size:22px;">5つの質問で、あなたのサロンに<br>合う制度をお探しします</h3>
+      <p class="q-sub" style="margin-top:10px;">選択肢を選ぶだけ・約1分。個人情報の入力はありません。</p>
+      <button class="btn" style="margin-top:18px;" onclick="startQuiz()">診断をはじめる ❀</button>
+    </div>`;
+}
+
+function startQuiz() {
+  step = 0; answers = {};
+  renderQuestion();
+  document.getElementById("shindan").scrollIntoView({ block: "start" });
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[step];
+  const pct = Math.round((step) / QUESTIONS.length * 100);
+  const isMulti = q.type === "multi";
+  const cur = answers[q.id] || (isMulti ? [] : null);
+
+  let optsHtml = q.options.map(o => {
+    const sel = isMulti ? cur.includes(o.v) : cur === o.v;
+    return `<button type="button" class="opt${sel ? " selected" : ""}" data-v="${o.v}">
+      <span class="petal">❀</span>
+      <span>${o.label}${o.sub ? `<small>${o.sub}</small>` : ""}</span>
+    </button>`;
+  }).join("");
+
+  panel.innerHTML = `
+    <div class="fade-in">
+      <div class="progress">
+        <span class="label">Q${step + 1} / ${QUESTIONS.length}</span>
+        <div class="bar"><i style="width:${pct}%"></i></div>
+      </div>
+      <h3 class="q-title">${q.title}</h3>
+      <p class="q-sub">${q.sub || "ひとつ選んでください"}</p>
+      <div class="opts">${optsHtml}</div>
+      <div class="q-nav">
+        ${step > 0 ? `<button class="link-back" onclick="goBack()">← まえの質問へ</button>` : `<span></span>`}
+        ${isMulti ? `<button class="btn small" id="nextBtn" onclick="goNext()">つぎへ ❀</button>` : `<span></span>`}
+      </div>
+    </div>`;
+
+  panel.querySelectorAll(".opt").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const v = btn.dataset.v;
+      if (isMulti) {
+        const arr = answers[q.id] || (answers[q.id] = []);
+        const i = arr.indexOf(v);
+        if (i >= 0) { arr.splice(i, 1); btn.classList.remove("selected"); }
+        else { arr.push(v); btn.classList.add("selected"); }
+      } else {
+        answers[q.id] = v;
+        goNext();
+      }
+    });
+  });
+}
+
+function goBack() { step--; renderQuestion(); }
+
+function goNext() {
+  const q = QUESTIONS[step];
+  if (q.type === "multi" && (!answers[q.id] || answers[q.id].length === 0)) {
+    answers[q.id] = [];
+  }
+  step++;
+  if (step >= QUESTIONS.length) renderResults();
+  else renderQuestion();
+}
+
+function flowers(n) {
+  let h = "";
+  for (let i = 1; i <= 3; i++) h += i <= n ? "❀" : `<span class="dim">❀</span>`;
+  const label = n === 3 ? "有力候補" : n === 2 ? "検討の価値あり" : "参考に";
+  return `${h}<small>${label}</small>`;
+}
+
+function renderResults() {
+  const res = diagnose(answers);
+  const g = new Set(answers.goals || []);
+  const soloWantsStaffStuff = answers.staff === "solo" && (g.has("raise") || g.has("training") || g.has("family"));
+
+  let html = `<div class="fade-in">
+    <div class="progress"><span class="label">診断結果</span><div class="bar"><i style="width:100%"></i></div></div>
+    <h3 class="q-title serif" style="font-size:21px;">あなたのサロンに合いそうな制度は<br><span style="color:var(--rose)">${res.length}件</span> みつかりました ❀</h3>
+    <p class="q-sub">相性のよい順に並んでいます。「❀❀❀」から順にチェックしてみてください。</p>`;
+
+  if (soloWantsStaffStuff) {
+    html += `<div class="result-note">💡 <b>ひとりサロンの方へ：</b>お給料アップ・研修・育休などの「助成金」は、スタッフを雇用してから使える制度です。いまは持続化補助金やIT系の補助金がおすすめ。将来スタッフを雇うときに、またこの診断に戻ってきてくださいね。</div>`;
+  }
+
+  res.forEach(r => {
+    const d = SUBSIDIES[r.id];
+    html += `<div class="r-card">
+      <div class="r-top">
+        <div>
+          <span class="tag ${d.type}">${d.typeLabel}</span>
+          <div class="r-title">${d.name}</div>
+        </div>
+        <div class="r-flowers">${flowers(r.score)}</div>
+      </div>
+      <div class="r-grid">
+        <div><span class="k">もらえる金額のめやす</span><b>${d.max}</b></div>
+        <div><span class="k">補助・助成の割合</span>${d.rate}</div>
+      </div>
+      <div style="font-size:13.5px;"><span class="k" style="color:var(--ink-soft); font-size:11.5px; letter-spacing:.1em;">こんなことに使えます</span>${d.use}</div>
+      <div class="r-hint"><b>ひとことメモ：</b>${d.hint}</div>
+      ${r.note ? `<div class="r-note-line">※ ${r.note}</div>` : ""}
+      <div class="r-actions"><a href="${d.link}" target="_blank" rel="noopener">${d.linkLabel}を見る →</a></div>
+    </div>`;
+  });
+
+  html += `
+    <div class="next-box">
+      <h3>❀ つぎの一歩（ぜんぶ無料です）</h3>
+      <ul>
+        <li><b>補助金のこと</b> → お近くの「商工会議所・商工会」へ。持続化補助金は申請の書類づくりまで無料で伴走してくれます。</li>
+        <li><b>助成金のこと</b>（雇用・お給料まわり）→ 「社会保険労務士（社労士）」さんへ。初回無料相談の事務所も多いです。</li>
+        <li><b>どこに行けばいいか迷ったら</b> → 国の無料相談窓口「よろず支援拠点」が全国にあります。</li>
+      </ul>
+      ${CONTACT.url ? `
+      <div style="margin-top:18px; padding-top:16px; border-top:1px dashed color-mix(in srgb, var(--rose) 35%, transparent);">
+        <p style="margin:0 0 4px; font-size:14px;"><b style="color:var(--rose-deep);">おひとりで悩まなくて大丈夫 ❀</b></p>
+        <p style="margin:0 0 12px; font-size:13px; color:var(--ink-soft);">${CONTACT.note}</p>
+        <a class="btn small" href="${CONTACT.url}" target="_blank" rel="noopener">${CONTACT.label} ❀</a>
+      </div>` : ""}
+    </div>
+    <div style="text-align:center; margin-top:26px;">
+      <button class="btn ghost small" onclick="startQuiz()">もういちど診断する</button>
+    </div>
+    <p style="font-size:11.5px; color:var(--ink-soft); margin-top:20px;">※ 2026年7月時点の情報にもとづく簡易診断です。受給を保証するものではありません。金額・要件・募集時期は必ず公式サイトでご確認ください。</p>
+  </div>`;
+
+  panel.innerHTML = html;
+  document.getElementById("shindan").scrollIntoView({ block: "start" });
+}
+
+// 制度一覧
+const sysList = document.getElementById("sysList");
+sysList.innerHTML = Object.values(SUBSIDIES).map(d => `
+  <details class="sys">
+    <summary>${d.name}<span class="tag ${d.type}" style="margin:0 0 0 auto;">${d.typeLabel}</span></summary>
+    <div class="body">
+      <p style="margin:0 0 6px;"><b>金額のめやす：</b>${d.max}（${d.rate}）</p>
+      <p style="margin:0 0 6px;"><b>使えること：</b>${d.use}</p>
+      <p style="margin:0 0 6px;"><b>おもな条件：</b>${d.cond}</p>
+      <p style="margin:0 0 10px;">${d.hint}</p>
+      <a href="${d.link}" target="_blank" rel="noopener">${d.linkLabel}を見る →</a>
+    </div>
+  </details>`).join("");
+
+renderIntro();
+</script>
+
+</body>
+</html>
