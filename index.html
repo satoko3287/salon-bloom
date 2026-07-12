@@ -379,6 +379,18 @@
       </div>
     </div>
   </section>
+
+  <section id="soudan">
+    <div class="wrap" style="max-width:720px; text-align:center;">
+      <div class="step-card" style="padding:40px 30px;">
+        <div style="font-size:30px; color:var(--rose); margin-bottom:10px;">❀</div>
+        <h2 class="serif" style="margin-bottom:10px;">おひとりで悩まなくて大丈夫</h2>
+        <p style="font-size:14px; color:var(--ink-soft); margin:0 auto 22px; max-width:480px;">「診断してみたけど、どれから手をつければいいの？」——そんなふんわりした質問で大歓迎です。むずかしい言葉を使わずにお答えします。無理な営業やしつこい連絡は一切ありません。</p>
+        <a class="btn js-contact-link" href="#soudan">LINEで気軽に聞いてみる ❀</a>
+        <p style="font-size:11.5px; color:var(--ink-soft); margin:14px 0 0;">相談は無料です。お気軽にどうぞ。</p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -751,12 +763,11 @@ function renderResults() {
         <li><b>助成金のこと</b>（雇用・お給料まわり）→ 「社会保険労務士（社労士）」さんへ。初回無料相談の事務所も多いです。</li>
         <li><b>どこに行けばいいか迷ったら</b> → 国の無料相談窓口「よろず支援拠点」が全国にあります。</li>
       </ul>
-      ${CONTACT.url ? `
       <div style="margin-top:18px; padding-top:16px; border-top:1px dashed color-mix(in srgb, var(--rose) 35%, transparent);">
         <p style="margin:0 0 4px; font-size:14px;"><b style="color:var(--rose-deep);">おひとりで悩まなくて大丈夫 ❀</b></p>
         <p style="margin:0 0 12px; font-size:13px; color:var(--ink-soft);">${CONTACT.note}</p>
-        <a class="btn small" href="${CONTACT.url}" target="_blank" rel="noopener">${CONTACT.label} ❀</a>
-      </div>` : ""}
+        <a class="btn small js-contact-link" href="${CONTACT.url || "#soudan"}" ${CONTACT.url ? 'target="_blank" rel="noopener"' : ""}>${CONTACT.label} ❀</a>
+      </div>
     </div>
     <div style="text-align:center; margin-top:26px;">
       <button class="btn ghost small" onclick="startQuiz()">もういちど診断する</button>
@@ -783,6 +794,15 @@ sysList.innerHTML = Object.values(SUBSIDIES).map(d => `
   </details>`).join("");
 
 renderIntro();
+
+// LINEリンクが設定されたら、すべての相談ボタンに反映
+if (CONTACT.url) {
+  document.querySelectorAll(".js-contact-link").forEach(a => {
+    a.href = CONTACT.url;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+}
 </script>
 
 </body>
