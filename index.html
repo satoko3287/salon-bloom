@@ -223,6 +223,13 @@
   .r-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px 20px; margin: 12px 0; font-size: 13.5px; }
   .r-grid b { color: var(--rose-deep); font-weight: 600; }
   .r-grid .k { color: var(--ink-soft); font-size: 11.5px; letter-spacing: .1em; display: block; }
+  .r-jitsu {
+    background: color-mix(in srgb, var(--gold) 10%, var(--rose-mist));
+    border-radius: 10px; padding: 10px 16px; margin: 12px 0 4px;
+    font-size: 13.5px;
+  }
+  .r-jitsu b { color: var(--rose-deep); font-size: 15px; }
+  .r-jitsu .k { color: var(--ink-soft); font-size: 11px; letter-spacing: .12em; margin-right: 8px; }
   .r-hint { font-size: 13.5px; color: var(--ink-soft); border-top: 1px dashed var(--line); padding-top: 12px; margin-top: 12px; }
   .r-hint b { color: var(--ink); }
   .r-note-line { font-size: 12.5px; color: var(--gold); margin-top: 8px; }
@@ -291,9 +298,9 @@
 <main>
   <div class="hero">
     <div class="wrap">
-      <span class="eyebrow">FOR SALON OWNERS</span>
-      <h1 class="serif">サロンに、<span class="accent">咲く</span>追い風を。
-        <span class="h1-sub"><span class="ph">あなたのサロンで使える</span><span class="ph">補助金・助成金が</span><span class="ph">わかります。</span></span></h1>
+      <span class="eyebrow">サロンに、咲く追い風を。</span>
+      <h1 class="serif"><span class="ph">あと<span class="accent">50万円</span>あったら、</span><span class="ph">やりたかったこと、</span><span class="ph">ありませんか？</span>
+        <span class="h1-sub"><span class="ph">あなたのサロンで使える</span><span class="ph">補助金・助成金が、</span><span class="ph">5つの質問でわかります。</span></span></h1>
       <p class="lead">「補助金って、うちみたいな小さなサロンでも使えるの？」——使えます。5つの質問に答えるだけで、あなたのサロンに合う制度の候補を❀の相性つきでご案内。専門用語ぬきで、やさしく説明します。</p>
       <div class="hero-cta">
         <a class="btn" href="#shindan">無料で診断をはじめる</a>
@@ -421,6 +428,7 @@ const SUBSIDIES = {
     type: "hojo", typeLabel: "補助金",
     max: "50万円〜最大250万円", rate: "2/3（赤字の場合3/4）",
     use: "HP・チラシ・広告、看板、内装工事、エステ機器 など",
+    jitsu: "<b>75万円</b>ぶんのHP・チラシ・看板が → 実質 <b>25万円</b> の負担に",
     hint: "集客にお金を使うなら、まずコレ。個人サロンでいちばん使われている定番の補助金です。地域の商工会議所が無料で申請をサポートしてくれます。",
     cond: "開業届を出している小規模事業者（サービス業は従業員5人以下）",
     link: "https://www.chusho.meti.go.jp/keiei/shokibo/jizoku/", linkLabel: "中小企業庁の公式ページ"
@@ -430,6 +438,7 @@ const SUBSIDIES = {
     type: "hojo", typeLabel: "補助金",
     max: "最大450万円", rate: "1/2〜2/3",
     use: "予約システム、POSレジ、会計ソフト、顧客管理、キャッシュレス端末",
+    jitsu: "<b>100万円</b>の予約システム導入が → 実質 <b>50万円</b> に",
     hint: "予約や会計の手間を減らしたいならコレ。登録済みのITツールを選ぶ方式なので、ツールの販売会社と二人三脚で申請できます。",
     cond: "導入するツールが制度に登録されていること",
     link: "https://it-shien.smrj.go.jp/", linkLabel: "公式サイト"
@@ -439,6 +448,7 @@ const SUBSIDIES = {
     type: "josei", typeLabel: "助成金",
     max: "最大600万円", rate: "3/4〜4/5（とても高い！）",
     use: "スタッフの時給アップとセットで、エステ機器・予約システムなどの設備投資",
+    jitsu: "<b>100万円</b>のエステ機器が → 実質 <b>20万円</b> に（助成率4/5の場合）",
     hint: "「お給料アップ」と「設備投資」を両方やりたいなら、いちばんお得な制度。時給を50円以上上げることが条件です。",
     cond: "雇用しているスタッフがいて、事業場内の最低賃金を引き上げること",
     link: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/03.html", linkLabel: "厚生労働省の公式ページ"
@@ -448,6 +458,7 @@ const SUBSIDIES = {
     type: "josei", typeLabel: "助成金",
     max: "1人あたり最大80万円", rate: "定額支給",
     use: "パート・アルバイトのスタッフを正社員にしたとき",
+    jitsu: "パートさん1人の正社員化で → 最大 <b>80万円</b> の支給",
     hint: "「正社員にしてあげたい子がいる」なら。大事なのは順番で、転換する前に『キャリアアップ計画』の提出が必要。先に社労士さんへ相談を。",
     cond: "雇用保険に入っているスタッフがいること・事前の計画提出",
     link: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/part_haken/jigyounushi/career.html", linkLabel: "厚生労働省の公式ページ"
@@ -457,6 +468,7 @@ const SUBSIDIES = {
     type: "josei", typeLabel: "助成金",
     max: "研修費用の最大75%＋研修中の賃金も一部助成", rate: "コースによる",
     use: "スタッフの技術研修・接客研修・資格取得など",
+    jitsu: "<b>20万円</b>の技術研修が → 実質 <b>5万円</b>＋研修中のお給料も一部カバー",
     hint: "スタッフに新しい技術を学ばせたいときに。研修費だけでなく「研修中のお給料」まで助成されるのがうれしいポイント。",
     cond: "雇用保険に入っているスタッフがいること",
     link: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/kyufukin/d01-1.html", linkLabel: "厚生労働省の公式ページ"
@@ -466,6 +478,7 @@ const SUBSIDIES = {
     type: "josei", typeLabel: "助成金",
     max: "1人あたり数十万円（コースによる）", rate: "定額支給",
     use: "産休・育休の取得と職場復帰のサポート、代わりのスタッフの確保",
+    jitsu: "育休の取得＆復帰サポートで → 1人あたり <b>数十万円</b> の支給",
     hint: "「出産しても戻ってこられるサロン」づくりの味方。女性スタッフの多いサロンだからこそ、知っておきたい制度です。",
     cond: "雇用保険に入っているスタッフがいること・育休制度の整備",
     link: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kodomo/shokuba_kosodate/ryouritsu01/", linkLabel: "厚生労働省の公式ページ"
@@ -475,6 +488,7 @@ const SUBSIDIES = {
     type: "hojo", typeLabel: "補助金",
     max: "200万円〜（従業員数による）", rate: "1/2",
     use: "カタログから選ぶ省人化機器（自動精算機、予約・受付システムなど）",
+    jitsu: "<b>150万円</b>の自動精算機が → 実質 <b>75万円</b> に",
     hint: "人手不足をラクにする機器を「カタログから選ぶだけ」の新しいタイプ。対象製品がカタログに載っているかの確認から始めましょう。",
     cond: "カタログ登録された製品が対象",
     link: "https://shoryokuka.smrj.go.jp/", linkLabel: "公式サイト"
@@ -484,6 +498,7 @@ const SUBSIDIES = {
     type: "hojo", typeLabel: "補助金",
     max: "750万円〜", rate: "1/2（小規模事業者は2/3）",
     use: "革新的な新サービスの開発、高額な設備投資",
+    jitsu: "<b>900万円</b>の新サービス投資が → 実質 <b>300万円</b> に（小規模2/3補助）",
     hint: "大きめの投資で新しいサービスを立ち上げるときの選択肢。エステで使えるケースは限られるので、専門家に相談してから検討を。",
     cond: "「革新性」のある事業計画・賃上げ計画が必要",
     link: "https://portal.monodukuri-hojo.jp/", linkLabel: "公式サイト"
@@ -502,6 +517,7 @@ const SUBSIDIES = {
     type: "chiho", typeLabel: "千葉県の制度",
     max: "最大100万円", rate: "1/2",
     use: "創業時の設備費・広告費など",
+    jitsu: "<b>200万円</b>の開業費が → 実質 <b>100万円</b> に",
     hint: "千葉県で創業するなら要チェック。募集は年に一度で期間が短めなので、次回募集の時期を早めに確認しておくのがコツ。",
     cond: "県内で創業予定、または創業まもない方（要件あり）",
     link: "https://www.ccjc-net.or.jp/category_list.php?frmCd=48-1-1-0-0", linkLabel: "千葉県産業振興センター"
@@ -520,6 +536,7 @@ const SUBSIDIES = {
     type: "chiho", typeLabel: "東京都の制度",
     max: "最大400万円", rate: "2/3",
     use: "家賃、広告費、器具備品、従業員の人件費など",
+    jitsu: "<b>600万円</b>の創業費（家賃・広告など）が → 実質 <b>200万円</b> に",
     hint: "都内で創業まもないサロンさんは必ずチェック。なんと「家賃」まで対象になる、とても心強い制度です（応募要件あり）。",
     cond: "都内で創業5年未満＋所定の要件（TOKYO創業ステーション利用など）",
     link: "https://www.tokyo-kosha.or.jp/support/josei/jigyo/sogyo.html", linkLabel: "東京都中小企業振興公社"
@@ -753,6 +770,7 @@ function renderResults() {
         <div><span class="k">もらえる金額のめやす</span><b>${d.max}</b></div>
         <div><span class="k">補助・助成の割合</span>${d.rate}</div>
       </div>
+      ${d.jitsu ? `<div class="r-jitsu"><span class="k">たとえば</span>${d.jitsu} ✨</div>` : ""}
       <div style="font-size:13.5px;"><span class="k" style="color:var(--ink-soft); font-size:11.5px; letter-spacing:.1em;">こんなことに使えます</span>${d.use}</div>
       <div class="r-hint"><b>ひとことメモ：</b>${d.hint}</div>
       ${r.note ? `<div class="r-note-line">※ ${r.note}</div>` : ""}
@@ -777,7 +795,7 @@ function renderResults() {
     <div style="text-align:center; margin-top:26px;">
       <button class="btn ghost small" onclick="startQuiz()">もういちど診断する</button>
     </div>
-    <p style="font-size:11.5px; color:var(--ink-soft); margin-top:20px;">※ 2026年7月時点の情報にもとづく簡易診断です。受給を保証するものではありません。金額・要件・募集時期は必ず公式サイトでご確認ください。</p>
+    <p style="font-size:11.5px; color:var(--ink-soft); margin-top:20px;">※ 2026年7月時点の情報にもとづく簡易診断です。受給を保証するものではありません。「たとえば」の実質負担は、わかりやすさを優先した計算イメージです。金額・要件・募集時期は必ず公式サイトでご確認ください。</p>
   </div>`;
 
   panel.innerHTML = html;
@@ -791,6 +809,7 @@ sysList.innerHTML = Object.values(SUBSIDIES).map(d => `
     <summary>${d.name}<span class="tag ${d.type}" style="margin:0 0 0 auto;">${d.typeLabel}</span></summary>
     <div class="body">
       <p style="margin:0 0 6px;"><b>金額のめやす：</b>${d.max}（${d.rate}）</p>
+      ${d.jitsu ? `<div class="r-jitsu" style="margin:6px 0 10px;"><span class="k">たとえば</span>${d.jitsu} ✨</div>` : ""}
       <p style="margin:0 0 6px;"><b>使えること：</b>${d.use}</p>
       <p style="margin:0 0 6px;"><b>おもな条件：</b>${d.cond}</p>
       <p style="margin:0 0 10px;">${d.hint}</p>
