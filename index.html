@@ -136,10 +136,15 @@
     padding: 5px 16px 5px 19px; border-radius: 999px; margin-bottom: 26px;
   }
   h1 {
-    font-size: clamp(30px, 5.4vw, 46px); line-height: 1.55; margin: 0 0 20px;
-    letter-spacing: .06em; text-wrap: balance; font-weight: 600;
+    font-size: clamp(23px, 6.8vw, 44px); line-height: 1.5; margin: 0 0 20px;
+    letter-spacing: .06em; font-weight: 600;
   }
   h1 .accent { color: var(--rose); }
+  h1 .h1-sub {
+    display: block; font-size: clamp(15px, 3.6vw, 22px); letter-spacing: .1em;
+    margin-top: 14px; text-wrap: balance; line-height: 1.9;
+  }
+  .ph { display: inline-block; }
   .hero p.lead { max-width: 560px; color: var(--ink-soft); font-size: 15.5px; margin: 0 0 34px; }
   .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 30px; }
   .hero-notes { display: flex; gap: 22px; flex-wrap: wrap; font-size: 13px; color: var(--ink-soft); }
@@ -287,8 +292,8 @@
   <div class="hero">
     <div class="wrap">
       <span class="eyebrow">FOR SALON OWNERS</span>
-      <h1 class="serif">サロンに、<span class="accent">咲く</span>追い風を。<br>
-        あなたのサロンで使える<br>補助金・助成金がわかります。</h1>
+      <h1 class="serif">サロンに、<span class="accent">咲く</span>追い風を。
+        <span class="h1-sub"><span class="ph">あなたのサロンで使える</span><span class="ph">補助金・助成金が</span><span class="ph">わかります。</span></span></h1>
       <p class="lead">「補助金って、うちみたいな小さなサロンでも使えるの？」——使えます。5つの質問に答えるだけで、あなたのサロンに合う制度の候補を❀の相性つきでご案内。専門用語ぬきで、やさしく説明します。</p>
       <div class="hero-cta">
         <a class="btn" href="#shindan">無料で診断をはじめる</a>
@@ -644,7 +649,7 @@ function renderIntro() {
   panel.innerHTML = `
     <div class="fade-in" style="text-align:center; padding: 20px 0;">
       <div style="font-size:34px; color:var(--rose); margin-bottom:14px;">❀</div>
-      <h3 class="q-title serif" style="font-size:22px;">5つの質問で、あなたのサロンに<br>合う制度をお探しします</h3>
+      <h3 class="q-title serif" style="font-size:22px;"><span class="ph">5つの質問で、</span><span class="ph">あなたのサロンに合う</span><span class="ph">制度をお探しします</span></h3>
       <p class="q-sub" style="margin-top:10px;">選択肢を選ぶだけ・約1分。個人情報の入力はありません。</p>
       <button class="btn" style="margin-top:18px;" onclick="startQuiz()">診断をはじめる ❀</button>
     </div>`;
@@ -727,7 +732,7 @@ function renderResults() {
 
   let html = `<div class="fade-in">
     <div class="progress"><span class="label">診断結果</span><div class="bar"><i style="width:100%"></i></div></div>
-    <h3 class="q-title serif" style="font-size:21px;">あなたのサロンに合いそうな制度は<br><span style="color:var(--rose)">${res.length}件</span> みつかりました ❀</h3>
+    <h3 class="q-title serif" style="font-size:21px;"><span class="ph">あなたのサロンに</span><span class="ph">合いそうな制度は</span> <span class="ph"><span style="color:var(--rose)">${res.length}件</span> みつかりました ❀</span></h3>
     <p class="q-sub">相性のよい順に並んでいます。「❀❀❀」から順にチェックしてみてください。</p>`;
 
   if (soloWantsStaffStuff) {
